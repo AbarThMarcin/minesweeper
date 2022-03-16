@@ -1,0 +1,25 @@
+.header {
+   width: 100%;
+   background-color: var(--middlegray);
+   display: flex;
+   align-items: center;
+   padding: 6px;
+   border-left: 5px solid var(--darkgray);
+   border-top: 5px solid var(--darkgray);
+   border-bottom: 5px solid var(--lightgray);
+   border-right: 5px solid var(--lightgray);
+   position: relative;
+   display: flex;
+   justify-content: center;
+}
+
+.header > div:nth-of-type(1) {
+   position: absolute;
+   left: 6px;
+   top: 4px;
+}
+
+.header > div:nth-of-type(n + 2) {
+   margin-left: 5px;
+   margin-right: 5px;
+}

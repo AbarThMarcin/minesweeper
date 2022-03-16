@@ -1,0 +1,13 @@
+.scoreTimer {
+   color: rgb(255, 121, 121);
+   background-color: var(--verydarkgray);
+   border-radius: 5px;
+   letter-spacing: 2px;
+   text-align: center;
+   width: 60px;
+   height: 30px;
+   font-size: 1.4rem;
+   display: flex;
+   justify-content: center;
+   align-items: center;
+}

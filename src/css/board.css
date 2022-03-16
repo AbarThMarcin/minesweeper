@@ -1,0 +1,15 @@
+@import url('https://fonts.googleapis.com/css2?family=Bungee&display=swap');
+
+.board {
+   border-left: 5px solid var(--darkgray);
+   border-top: 5px solid var(--darkgray);
+   border-bottom: 5px solid var(--lightgray);
+   border-right: 5px solid var(--lightgray);
+   display: flex;
+   font-family: 'Bungee', cursive;
+   font-size: 1.3rem;
+}
+
+.board.unclickable {
+   pointer-events: none;
+}

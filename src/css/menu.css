@@ -1,0 +1,123 @@
+.nav {
+   position: relative;
+}
+
+.btnMenu {
+   background-color: var(--middlegray);
+   width: 35px;
+   height: 30px;
+   border: 3px solid var(--darkgray);
+   border-radius: 3px;
+   position: relative;
+   cursor: pointer;
+}
+
+.btnMenu .line {
+   position: absolute;
+   width: 20px;
+   height: 3px;
+   background-color: var(--darkgray);
+   left: 50%;
+   transform: translateX(-50%);
+}
+
+.btnMenu .line1 {
+   top: 4px;
+}
+.btnMenu .line2 {
+   top: 50%;
+   transform: translate(-50%, -50%);
+}
+.btnMenu .line3 {
+   bottom: 4px;
+}
+
+.btnMenu.btnMenu-clicked .line1 {
+   transform: translate(-50%, 7px) rotate(45deg);
+}
+.btnMenu.btnMenu-clicked .line2 {
+   display: none;
+}
+.btnMenu.btnMenu-clicked .line3 {
+   transform: translate(-50%, -6px) rotate(-45deg);
+}
+
+.nav .menu {
+   position: absolute;
+   width: 140px;
+   background-color: var(--darkgray-menu);
+   top: 33px;
+   padding: 6px;
+   flex-direction: column;
+   border-radius: 3px;
+   display: none;
+}
+
+.nav .btnMenu.btnMenu-clicked + .menu {
+   display: flex;
+}
+
+.nav .menu .custom div {
+   width: 100%;
+   display: flex;
+   justify-content: space-between;
+   height: 24px;
+}
+
+.input {
+   width: 50px;
+   border: 2px solid var(--darkgray);
+   color: var(--darkgray);
+   font-size: 1rem;
+   padding: 2px;
+}
+
+.label {
+   width: 60px;
+   vertical-align: middle;
+   height: 100%;
+   color: var(--lightgray);
+   font-weight: lighter;
+   text-align: right;
+   margin-right: 5px;
+}
+
+.input:focus {
+   outline: none;
+}
+
+.btnPre {
+   border: 2px solid var(--darkgray);
+   color: var(--darkgray);
+   cursor: pointer;
+   width: 100%;
+}
+
+.btnPre:hover,
+.btnPre-clicked {
+   color: var(--verydarkgray);
+}
+
+.btnMenu:hover .line,
+.btnMenu.btnMenu-clicked .line {
+   background-color: var(--verydarkgray);
+}
+.btnMenu:hover,
+.btnMenu.btnMenu-clicked {
+   border-color: var(--verydarkgray);
+}
+
+.btnPre:nth-of-type(4) {
+   margin-top: 7px;
+}
+
+.custom {
+   display: none;
+}
+.btnPre-clicked.btnPre:nth-of-type(4) {
+   color: var(--verydarkgray);
+}
+
+.btnPre-clicked.btnPre + .custom {
+   display: block;
+}

@@ -1,0 +1,45 @@
+@import './header.css';
+@import './board.css';
+@import './field.css';
+@import './menu.css';
+@import './scoreTimer.css';
+@import './restart.css';
+@import url('https://fonts.googleapis.com/css2?family=Roboto+Mono:wght@700&display=swap');
+
+:root {
+   --bgcolor: linear-gradient(45deg, #6498e6, #91dbe5);
+   --lightgray: #fff;
+   --middlegray: rgb(178, 187, 240);
+   --darkgray: rgb(102, 97, 172);
+   --verydarkgray: rgb(65, 61, 110);
+   --darkgray-menu: rgba(102, 97, 172, 0.8);
+}
+
+* {
+   padding: 0;
+   margin: 0;
+   box-sizing: border-box;
+   font-family: 'Roboto Mono', monospace;
+}
+
+.app {
+   width: 100vw;
+   height: 100vh;
+   display: flex;
+   justify-content: center;
+   align-items: center;
+   background: var(--bgcolor);
+}
+
+.container {
+   border: 10px solid var(--middlegray);
+   display: flex;
+   flex-direction: column;
+   gap: 10px;
+   background-color: var(--middlegray);
+   padding: 10px;
+   border-left: 5px solid var(--lightgray);
+   border-top: 5px solid var(--lightgray);
+   border-bottom: 5px solid var(--darkgray);
+   border-right: 5px solid var(--darkgray);
+}

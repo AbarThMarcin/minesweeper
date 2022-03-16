@@ -1,0 +1,18 @@
+.btnRestart {
+   background-color: var(--darkgray);
+   border: none;
+   border-radius: 5px;
+   width: 90px;
+   height: 30px;
+   color: var(--lightgray);
+   letter-spacing: 2px;
+   cursor: pointer;
+   font-size: 0.9rem;
+}
+
+.btnRestart:hover {
+   color: var(--middlegray);
+}
+.btnRestart:active {
+   transform: scale(0.98);
+}

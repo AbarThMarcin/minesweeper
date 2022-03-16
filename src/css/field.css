@@ -1,0 +1,58 @@
+.field {
+   width: 25px;
+   height: 25px;
+   border-left: 3px solid var(--lightgray);
+   border-top: 3px solid var(--lightgray);
+   border-bottom: 3px solid var(--darkgray);
+   border-right: 3px solid var(--darkgray);
+   display: flex;
+   justify-content: center;
+   align-items: center;
+   cursor: default;
+   -webkit-touch-callout: none;
+   -webkit-user-select: none;
+   -khtml-user-select: none;
+   -moz-user-select: none;
+   -ms-user-select: none;
+   user-select: none;
+}
+
+.field.revealed {
+   border: 0.5px solid var(--darkgray);
+}
+
+.field.col1 {
+   color: blue;
+}
+.field.col2 {
+   color: green;
+}
+.field.col3 {
+   color: red;
+}
+.field.col4 {
+   color: darkblue;
+}
+.field.col5 {
+   color: darkred;
+}
+.field.col6 {
+   color: rgb(90, 44, 0);
+}
+.field.col7 {
+   color: rgb(1, 37, 0);
+}
+.field.col8 {
+   color: rgb(0, 0, 0);
+}
+
+.field.bomb {
+   color: transparent;
+   background: url('../../public/bomb.jpg') center center / cover no-repeat;
+   padding: 2px;
+   background-color: var(--darkgray);
+}
+.field.bomb.bomb-clicked {
+   background: url('../../public/bomb-clicked.jpg') center center / cover
+      no-repeat;
+}
