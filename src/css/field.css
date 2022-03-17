@@ -48,11 +48,21 @@
 
 .field.bomb {
    color: transparent;
-   background: url('../../public/bomb.jpg') center center / cover no-repeat;
+   background: url('../../public/icons/bomb.jpg') center center / cover no-repeat;
    padding: 2px;
    background-color: var(--darkgray);
 }
 .field.bomb.bomb-clicked {
-   background: url('../../public/bomb-clicked.jpg') center center / cover
+   background: url('../../public/icons/bomb-clicked.jpg') center center / cover
       no-repeat;
+}
+.field.flag {
+   color: transparent;
+   background: url('../../public/icons/flagCorrect.jpg') center center / cover no-repeat;
+   background-size: 100%;
+}
+.field.flagIncorrect {
+   color: transparent;
+   background: url('../../public/icons/flagIncorrect.jpg') center center / cover no-repeat;
+   background-size: 100%;
 }

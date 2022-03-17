@@ -2,7 +2,7 @@
 @import './board.css';
 @import './field.css';
 @import './menu.css';
-@import './scoreTimer.css';
+@import './bombsLeftTimer.css';
 @import './restart.css';
 @import url('https://fonts.googleapis.com/css2?family=Roboto+Mono:wght@700&display=swap');
 
@@ -10,6 +10,7 @@
    --bgcolor: linear-gradient(45deg, #6498e6, #91dbe5);
    --lightgray: #fff;
    --middlegray: rgb(178, 187, 240);
+   --middleLightergray: rgb(214, 218, 241);
    --darkgray: rgb(102, 97, 172);
    --verydarkgray: rgb(65, 61, 110);
    --darkgray-menu: rgba(102, 97, 172, 0.8);

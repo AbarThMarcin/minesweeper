@@ -1,24 +1,10 @@
-import { useState, useRef } from 'react'
 import Field from './Field'
 
-const Board = ({
-   boardTable,
-   showAllBombs,
-   revealArea,
-   createRandomBoard,
-   firstClick,
-   setFirstClick,
-   isRunning,
-   setIsRunning,
-   score,
-   setScore,
-}) => {
-   const [mousePressed, setMousePressed] = useState(false)
-   const boardEl = useRef(null)
+const Board = (props) => {
 
    return (
-      <div ref={boardEl} className="board">
-         {boardTable.map((col, id) => {
+      <div ref={props.boardEl} className="board">
+         {props.boardTable.map((col, id) => {
             return (
                <div
                   key={id}
@@ -29,18 +15,19 @@ const Board = ({
                         <Field
                            key={`${cell.x},${cell.y}`}
                            cell={cell}
-                           mousePressed={mousePressed}
-                           setMousePressed={setMousePressed}
-                           showAllBombs={showAllBombs}
-                           boardEl={boardEl}
-                           revealArea={revealArea}
-                           createRandomBoard={createRandomBoard}
-                           firstClick={firstClick}
-                           setFirstClick={setFirstClick}
-                           isRunning={isRunning}
-                           setIsRunning={setIsRunning}
-                           score={score}
-                           setScore={setScore}
+                           boardTable={props.boardTable}
+                           mousePressed={props.mousePressed}
+                           setMousePressed={props.setMousePressed}
+                           boardEl={props.boardEl}
+                           firstClick={props.firstClick}
+                           setFirstClick={props.setFirstClick}
+                           isRunning={props.isRunning}
+                           setIsRunning={props.setIsRunning}
+                           setBombsLeft={props.setBombsLeft}
+                           showAllBombs={props.showAllBombs}
+                           revealArea={props.revealArea}
+                           isGameCompleted={props.isGameCompleted}
+                           updateBoard={props.updateBoard}
                         />
                      )
                   })}

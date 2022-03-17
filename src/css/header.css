@@ -1,16 +1,15 @@
 .header {
    width: 100%;
+   height: 52px;
+   padding: 6px;
    background-color: var(--middlegray);
    display: flex;
-   align-items: center;
-   padding: 6px;
+   justify-content: center;
    border-left: 5px solid var(--darkgray);
    border-top: 5px solid var(--darkgray);
    border-bottom: 5px solid var(--lightgray);
    border-right: 5px solid var(--lightgray);
    position: relative;
-   display: flex;
-   justify-content: center;
 }
 
 .header > div:nth-of-type(1) {
@@ -18,8 +17,13 @@
    left: 6px;
    top: 4px;
 }
-
 .header > div:nth-of-type(n + 2) {
    margin-left: 5px;
    margin-right: 5px;
+}
+.header > div:nth-of-type(2) {
+   margin-left: 40px;
+}
+.header > div:last-of-type {
+   margin-right: 0px;
 }

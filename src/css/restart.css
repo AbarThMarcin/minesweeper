@@ -1,18 +1,21 @@
 .btnRestart {
-   background-color: var(--darkgray);
-   border: none;
+   background: url('../../public/icons/restart.png');
+   background-position: center center;
+   background-repeat: no-repeat;
+   background-size: 80%;
+   background-color: var(--middleLightergray);
+   border: 2px solid var(--darkgray);
    border-radius: 5px;
-   width: 90px;
+   width: 30px;
    height: 30px;
-   color: var(--lightgray);
-   letter-spacing: 2px;
    cursor: pointer;
    font-size: 0.9rem;
+   user-select: none;
 }
 
 .btnRestart:hover {
-   color: var(--middlegray);
+   border-color: var(--verydarkgray);
 }
 .btnRestart:active {
-   transform: scale(0.98);
+   transform: scale(0.95);
 }

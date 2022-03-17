@@ -1,4 +1,4 @@
-.scoreTimer {
+.bombsLeftTimer {
    color: rgb(255, 121, 121);
    background-color: var(--verydarkgray);
    border-radius: 5px;
@@ -10,4 +10,5 @@
    display: flex;
    justify-content: center;
    align-items: center;
+   user-select: none;
 }

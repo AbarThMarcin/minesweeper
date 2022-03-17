@@ -1,19 +1,31 @@
 import Menu from './Menu'
 import Timer from './Timer'
 import Restart from './Restart'
-import Score from './Score'
+import BombsLeft from './BombsLeft'
 
-const Header = ({ score, setPredefinedBoard }) => {
+const Header = ({ bombsLeft, setPredefinedBoard, boardEl, setIsRunning, setSeconds, setFirstClick }) => {
    return (
       <div className="header">
          <div>
-            <Menu setPredefinedBoard={setPredefinedBoard} />
+            <Menu
+               setPredefinedBoard={setPredefinedBoard}
+               boardEl={boardEl}
+               setIsRunning={setIsRunning}
+               setSeconds={setSeconds}
+               setFirstClick={setFirstClick}
+            />
          </div>
          <div>
-            <Score score={score} />
+            <BombsLeft bombsLeft={bombsLeft} />
          </div>
          <div>
-            <Restart setPredefinedBoard={setPredefinedBoard} />
+            <Restart
+               setPredefinedBoard={setPredefinedBoard}
+               boardEl={boardEl}
+               setIsRunning={setIsRunning}
+               setSeconds={setSeconds}
+               setFirstClick={setFirstClick}
+            />
          </div>
          <div>
             <Timer />

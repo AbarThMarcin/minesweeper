@@ -1,23 +1,25 @@
 import './css/app.css'
 import Board from './components/Board'
 import Header from './components/Header'
-import { useState, useEffect, createContext } from 'react'
+import { useState, useEffect, createContext, useRef } from 'react'
 import {
    createInitBoard,
    getBoardWithAllBombsRevealed,
    getBoardWithRevealedArea,
-   createRandomBoard,
+   getCurrentBoardInfo,
+   getCurrentBombsLeft,
 } from './func/createBoard'
 
 export const timerContext = createContext(0)
-export const setTimerContext = createContext(0)
 
 function App() {
    const [boardTable, setBoardTable] = useState([])
    const [seconds, setSeconds] = useState(0)
-   const [score, setScore] = useState(0)
+   const [bombsLeft, setBombsLeft] = useState(0)
    const [firstClick, setFirstClick] = useState(false)
    const [isRunning, setIsRunning] = useState(false)
+   const [mousePressed, setMousePressed] = useState(false)
+   const boardEl = useRef(null)
 
    // Create board
    useEffect(() => {
@@ -28,7 +30,16 @@ function App() {
          return () => clearInterval(timer)
       }
 
-      if (!firstClick) setPredefinedBoard()
+      if (!firstClick) setPredefinedBoard(getCurrentBoardInfo())
+
+      // // Check if game is completed (if number of bombs left is 0)
+      // if (isGameCompleted()) {
+      //    showAllBombs()
+      //    boardEl.current.classList.add('unclickable')
+      //    setIsRunning(false)
+      //    alert('Success!')
+      // }
+      
    }, [isRunning])
 
    // Show all Bombs function
@@ -42,34 +53,70 @@ function App() {
    }
 
    // Set pre-defined board
-   const setPredefinedBoard = () => {
-      setBoardTable(createInitBoard())
+   const setPredefinedBoard = (boardLevel) => {
+      setBoardTable(createInitBoard(boardLevel))
+      setBombsLeft(getCurrentBombsLeft())
+   }
+
+   // Check if game is completed
+   const isGameCompleted = () => {
+      let unrevealedCells = 0
+      let numOfBombs = getCurrentBoardInfo()[2]
+      for (let x = 0; x < boardTable.length; x++) {
+         for (let y = 0; y < boardTable[0].length; y++) {
+            if (!boardTable[x][y].revealed) unrevealedCells += 1
+         }
+      }
+      console.log(parseInt(unrevealedCells), parseInt(numOfBombs))
+      return parseInt(unrevealedCells) === parseInt(numOfBombs)
+   }
+
+   const updateBoard = (updatedCell) => {
+      let tempBoard = []
+      for (let x = 0; x < boardTable.length; x++) {
+         let col = []
+         for (let y = 0; y < boardTable[0].length; y++) {
+            if (updatedCell.x === x && updatedCell.y === y) {
+               col.push(updatedCell)
+            } else {
+               col.push(boardTable[x][y])
+            }
+         }
+         tempBoard.push(col)
+      }
+      setBoardTable(tempBoard)
    }
 
    return (
-      <div className="app">
+      <div className="app" onMouseDown={() => setMousePressed(true)} onMouseUp={() => setMousePressed(false)}>
          <div className="container">
-            <timerContext.Provider value={seconds}>
-               <setTimerContext.Provider value={setSeconds}>
-                  <Header
-                     className="header"
-                     score={score}
-                     setPredefinedBoard={setPredefinedBoard}
-                  />
-                  <Board
-                     className="board"
-                     boardTable={boardTable}
-                     showAllBombs={showAllBombs}
-                     revealArea={revealArea}
-                     createRandomBoard={createRandomBoard}
-                     firstClick={firstClick}
-                     setFirstClick={setFirstClick}
-                     isRunning={setIsRunning}
-                     setIsRunning={setIsRunning}
-                     score={score}
-                     setScore={setScore}
-                  />
-               </setTimerContext.Provider>
+            <timerContext.Provider value={{ seconds, setSeconds }}>
+               <Header
+                  className="header"
+                  bombsLeft={bombsLeft}
+                  setPredefinedBoard={setPredefinedBoard}
+                  boardEl={boardEl}
+                  setIsRunning={setIsRunning}
+                  setSeconds={setSeconds}
+                  setFirstClick={setFirstClick}
+               />
+               <Board
+                  className="board"
+                  boardTable={boardTable}
+                  firstClick={firstClick}
+                  setFirstClick={setFirstClick}
+                  isRunning={isRunning}
+                  setIsRunning={setIsRunning}
+                  bombsLeft={bombsLeft}
+                  setBombsLeft={setBombsLeft}
+                  mousePressed={mousePressed}
+                  setMousePressed={setMousePressed}
+                  boardEl={boardEl}
+                  showAllBombs={showAllBombs}
+                  revealArea={revealArea}
+                  isGameCompleted={isGameCompleted}
+                  updateBoard={updateBoard}
+               />
             </timerContext.Provider>
          </div>
       </div>
