@@ -1,4 +1,4 @@
-.field {
+.cell {
    width: 25px;
    height: 25px;
    border-left: 3px solid var(--lightgray);
@@ -17,51 +17,51 @@
    user-select: none;
 }
 
-.field.revealed {
+.cell.revealed {
    border: 0.5px solid var(--darkgray);
 }
 
-.field.col1 {
+.cell.col1 {
    color: blue;
 }
-.field.col2 {
+.cell.col2 {
    color: green;
 }
-.field.col3 {
+.cell.col3 {
    color: red;
 }
-.field.col4 {
+.cell.col4 {
    color: darkblue;
 }
-.field.col5 {
+.cell.col5 {
    color: darkred;
 }
-.field.col6 {
+.cell.col6 {
    color: rgb(90, 44, 0);
 }
-.field.col7 {
+.cell.col7 {
    color: rgb(1, 37, 0);
 }
-.field.col8 {
+.cell.col8 {
    color: rgb(0, 0, 0);
 }
 
-.field.bomb {
+.cell.bomb {
    color: transparent;
    background: url('../../public/icons/bomb.jpg') center center / cover no-repeat;
    padding: 2px;
    background-color: var(--darkgray);
 }
-.field.bomb.bomb-clicked {
+.cell.bomb.bomb-clicked {
    background: url('../../public/icons/bomb-clicked.jpg') center center / cover
       no-repeat;
 }
-.field.flag {
+.cell.flag {
    color: transparent;
    background: url('../../public/icons/flagCorrect.jpg') center center / cover no-repeat;
    background-size: 100%;
 }
-.field.flagIncorrect {
+.cell.flagIncorrect {
    color: transparent;
    background: url('../../public/icons/flagIncorrect.jpg') center center / cover no-repeat;
    background-size: 100%;

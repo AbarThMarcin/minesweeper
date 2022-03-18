@@ -1,4 +1,4 @@
-import Field from './Field'
+import Cell from './Cell'
 
 const Board = (props) => {
 
@@ -12,7 +12,7 @@ const Board = (props) => {
                >
                   {col.map((cell) => {
                      return (
-                        <Field
+                        <Cell
                            key={`${cell.x},${cell.y}`}
                            cell={cell}
                            boardTable={props.boardTable}
@@ -26,8 +26,8 @@ const Board = (props) => {
                            setBombsLeft={props.setBombsLeft}
                            showAllBombs={props.showAllBombs}
                            revealArea={props.revealArea}
-                           isGameCompleted={props.isGameCompleted}
                            updateBoard={props.updateBoard}
+                           createRandBoard={props.createRandBoard}
                         />
                      )
                   })}

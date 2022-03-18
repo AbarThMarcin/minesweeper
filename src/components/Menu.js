@@ -1,7 +1,7 @@
 import { useState, useRef } from 'react'
 import { TEMPLATE_BEGINNER, TEMPLATE_INTERMEDIATE, TEMPLATE_EXPERT } from '../func/createBoard'
 
-const Menu = ({ setPredefinedBoard, boardEl, setIsRunning, setSeconds, setFirstClick }) => {
+const Menu = ({ setPredefinedBoard, boardEl, setIsRunning, setSeconds, setFirstClick, setIsGameCompleted, setIsGameLost }) => {
    const [customData, setCustomData] = useState([TEMPLATE_BEGINNER[0], TEMPLATE_BEGINNER[1], TEMPLATE_BEGINNER[2]])
    const menuEl = useRef(null)
    const customEl = useRef(null)
@@ -25,6 +25,8 @@ const Menu = ({ setPredefinedBoard, boardEl, setIsRunning, setSeconds, setFirstC
       setFirstClick(false)
       menuEl.current.classList.toggle('btnMenu-clicked')
       setCustomData(gameLevel)
+      setIsGameCompleted(false)
+      setIsGameLost(false)
    }
 
    const onChangeX = (e) => {

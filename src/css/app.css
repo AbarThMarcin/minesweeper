@@ -1,9 +1,10 @@
 @import './header.css';
 @import './board.css';
-@import './field.css';
+@import './cell.css';
 @import './menu.css';
 @import './bombsLeftTimer.css';
 @import './restart.css';
+@import './victory.css';
 @import url('https://fonts.googleapis.com/css2?family=Roboto+Mono:wght@700&display=swap');
 
 :root {
@@ -26,6 +27,7 @@
 .app {
    width: 100vw;
    height: 100vh;
+   flex-direction: column;
    display: flex;
    justify-content: center;
    align-items: center;
@@ -43,4 +45,5 @@
    border-top: 5px solid var(--lightgray);
    border-bottom: 5px solid var(--darkgray);
    border-right: 5px solid var(--darkgray);
+   position: relative;
 }
