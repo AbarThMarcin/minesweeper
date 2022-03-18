@@ -118,15 +118,23 @@ const getNeighbors = (x, y, board) => {
    return tempNeighbors
 }
 
-export const getBoardWithAllBombsRevealed = (boardTable) => {
+export const getBoardWithAllBombsRevealed = (boardTable, bombOrFlag) => {
    const tempBoard = []
    boardTable.forEach((col) => {
       const tempCol = []
       col.forEach((cell) => {
-         if (cell.value === 'X' && !cell.flagged) {
-            tempCol.push({ ...cell, revealed: true })
+         if (bombOrFlag === 'bomb') {
+            if (cell.value === 'X' && !cell.flagged) {
+               tempCol.push({ ...cell, revealed: true })
+            } else {
+               tempCol.push(cell)
+            }
          } else {
-            tempCol.push(cell)
+            if (cell.value === 'X' && !cell.flagged) {
+               tempCol.push({ ...cell, flagged: true })
+            } else {
+               tempCol.push(cell)
+            }
          }
       })
       tempBoard.push(tempCol)

@@ -1,6 +1,16 @@
-import { getCurrentBoardInfo } from '../func/createBoard'
+import { getCurrentBoardInfo, getTotalRevealedCellsToWin } from '../func/createBoard'
 
-const Restart = ({ setPredefinedBoard, boardEl, setIsRunning, setSeconds, setFirstClick, setIsGameCompleted, setIsGameLost }) => {
+const Restart = ({
+   setPredefinedBoard,
+   boardEl,
+   setIsRunning,
+   setSeconds,
+   setFirstClick,
+   setIsGameCompleted,
+   setIsGameLost,
+   setRevealedCells,
+   setRevealedCellsToWin,
+}) => {
    const onClick = () => {
       setPredefinedBoard(getCurrentBoardInfo())
       boardEl.current.classList.remove('unclickable')
@@ -9,6 +19,8 @@ const Restart = ({ setPredefinedBoard, boardEl, setIsRunning, setSeconds, setFir
       setFirstClick(false)
       setIsGameCompleted(false)
       setIsGameLost(false)
+      setRevealedCells(0)
+      setRevealedCellsToWin(getTotalRevealedCellsToWin())
    }
 
    return <button className="btnRestart" onClick={() => onClick()}></button>

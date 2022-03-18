@@ -1,6 +1,7 @@
 import './css/app.css'
 import Board from './components/Board'
 import Header from './components/Header'
+import Dummy from './components/Dummy'
 import { useState, useEffect, createContext, useRef } from 'react'
 import {
    createInitBoard,
@@ -22,6 +23,8 @@ function App() {
    const [mousePressed, setMousePressed] = useState(false)
    const [isGameCompleted, setIsGameCompleted] = useState(false)
    const [isGameLost, setIsGameLost] = useState(false)
+   const [revealedCells, setRevealedCells] = useState(0)
+   const [revealedCellsToWin, setRevealedCellsToWin] = useState(0)
    const boardEl = useRef(null)
 
    // Create board
@@ -33,28 +36,32 @@ function App() {
          return () => clearInterval(timer)
       }
 
-      if (!firstClick) setPredefinedBoard(getCurrentBoardInfo())
-
-      console.log('from useeffect', getRevealedCells())
+      if (!firstClick) {
+         setPredefinedBoard(getCurrentBoardInfo())
+         setRevealedCellsToWin(getTotalRevealedCellsToWin)
+      }
    }, [isRunning])
 
    // Show all Bombs function
    const showAllBombs = () => {
-      setBoardTable(getBoardWithAllBombsRevealed(boardTable))
+      setBoardTable(getBoardWithAllBombsRevealed(boardTable, 'bomb'))
       setIsGameLost(true)
    }
 
    // Reveal clicked area
    const revealArea = (x, y) => {
       setBoardTable(getBoardWithRevealedArea(boardTable, x, y))
-      checkSuccess()
    }
    const getBoardWithRevealedArea = (boardTable, x, y) => {
       boardTable[x][y].neighbors.forEach((nb) => revealNeighbor(boardTable, nb))
+      setRevealedCells((v) => v - 1)
       return boardTable
    }
    const revealNeighbor = (boardTable, n) => {
       const neighbor = boardTable[n[0]][n[1]]
+      if (!neighbor.revealed) {
+         setRevealedCells((v) => v + 1)
+      }
       neighbor.flagged = false
       neighbor.revealed = true
       if (neighbor.value !== 0) return
@@ -76,6 +83,7 @@ function App() {
          for (let y = 0; y < boardTable[0].length; y++) {
             if (updatedCell.x === x && updatedCell.y === y) {
                col.push(updatedCell)
+               if (updatedCell.revealed) setRevealedCells((v) => v + 1)
             } else {
                col.push(boardTable[x][y])
             }
@@ -83,7 +91,6 @@ function App() {
          tempBoard.push(col)
       }
       setBoardTable(tempBoard)
-      checkSuccess()
    }
 
    const getRevealedCells = () => {
@@ -96,25 +103,30 @@ function App() {
       return count
    }
 
-   const checkSuccess = () => {
-      const revealedCells = getRevealedCells()
-      console.log(revealedCells, getTotalRevealedCellsToWin())
-      if (revealedCells === getTotalRevealedCellsToWin() && !isGameLost) {
-         boardEl.current.classList.add('unclickable')
-         setIsRunning(false)
-         setIsGameCompleted(true)
-         setBombsLeft(0)
-      }
-   }
-
    const createRandBoard = (cell) => {
       setBoardTable(getRandomBoard(cell, boardTable))
    }
 
    return (
-      <div className="app" onMouseDown={() => setMousePressed(true)} onMouseUp={() => setMousePressed(false)}>
+      <div
+         className="app"
+         onMouseDown={() => setMousePressed(true)}
+         onMouseUp={() => setMousePressed(false)}
+      >
          <div className="container">
-            {isGameCompleted && !isGameLost && <div className='victory'>Victory!</div>}
+            {revealedCells === revealedCellsToWin && !isGameLost && (
+               <div className="victory">Victory!</div>
+            )}
+            <Dummy
+               setBoardTable={setBoardTable}
+               boardTable={boardTable}
+               revealedCells={revealedCells}
+               revealedCellsToWin={revealedCellsToWin}
+               boardEl={boardEl}
+               setIsRunning={setIsRunning}
+               setIsGameCompleted={setIsGameCompleted}
+               setBombsLeft={setBombsLeft}
+            />
             <timerContext.Provider value={{ seconds, setSeconds }}>
                <Header
                   className="header"
@@ -126,6 +138,8 @@ function App() {
                   setFirstClick={setFirstClick}
                   setIsGameCompleted={setIsGameCompleted}
                   setIsGameLost={setIsGameLost}
+                  setRevealedCells={setRevealedCells}
+                  setRevealedCellsToWin={setRevealedCellsToWin}
                />
                <Board
                   className="board"
@@ -143,6 +157,7 @@ function App() {
                   revealArea={revealArea}
                   updateBoard={updateBoard}
                   createRandBoard={createRandBoard}
+                  setRevealedCellsToWin={setRevealedCellsToWin}
                />
             </timerContext.Provider>
          </div>

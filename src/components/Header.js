@@ -3,7 +3,18 @@ import Timer from './Timer'
 import Restart from './Restart'
 import BombsLeft from './BombsLeft'
 
-const Header = ({ bombsLeft, setPredefinedBoard, boardEl, setIsRunning, setSeconds, setFirstClick, setIsGameCompleted, setIsGameLost }) => {
+const Header = ({
+   bombsLeft,
+   setPredefinedBoard,
+   boardEl,
+   setIsRunning,
+   setSeconds,
+   setFirstClick,
+   setIsGameCompleted,
+   setIsGameLost,
+   setRevealedCells,
+   setRevealedCellsToWin,
+}) => {
    return (
       <div className="header">
          <div>
@@ -15,6 +26,8 @@ const Header = ({ bombsLeft, setPredefinedBoard, boardEl, setIsRunning, setSecon
                setFirstClick={setFirstClick}
                setIsGameCompleted={setIsGameCompleted}
                setIsGameLost={setIsGameLost}
+               setRevealedCells={setRevealedCells}
+               setRevealedCellsToWin={setRevealedCellsToWin}
             />
          </div>
          <div>
@@ -29,6 +42,8 @@ const Header = ({ bombsLeft, setPredefinedBoard, boardEl, setIsRunning, setSecon
                setFirstClick={setFirstClick}
                setIsGameCompleted={setIsGameCompleted}
                setIsGameLost={setIsGameLost}
+               setRevealedCells={setRevealedCells}
+               setRevealedCellsToWin={setRevealedCellsToWin}
             />
          </div>
          <div>

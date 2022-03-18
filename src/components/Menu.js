@@ -1,7 +1,7 @@
 import { useState, useRef } from 'react'
-import { TEMPLATE_BEGINNER, TEMPLATE_INTERMEDIATE, TEMPLATE_EXPERT } from '../func/createBoard'
+import { TEMPLATE_BEGINNER, TEMPLATE_INTERMEDIATE, TEMPLATE_EXPERT, getTotalRevealedCellsToWin } from '../func/createBoard'
 
-const Menu = ({ setPredefinedBoard, boardEl, setIsRunning, setSeconds, setFirstClick, setIsGameCompleted, setIsGameLost }) => {
+const Menu = ({ setPredefinedBoard, boardEl, setIsRunning, setSeconds, setFirstClick, setIsGameCompleted, setIsGameLost, setRevealedCells, setRevealedCellsToWin }) => {
    const [customData, setCustomData] = useState([TEMPLATE_BEGINNER[0], TEMPLATE_BEGINNER[1], TEMPLATE_BEGINNER[2]])
    const menuEl = useRef(null)
    const customEl = useRef(null)
@@ -27,6 +27,8 @@ const Menu = ({ setPredefinedBoard, boardEl, setIsRunning, setSeconds, setFirstC
       setCustomData(gameLevel)
       setIsGameCompleted(false)
       setIsGameLost(false)
+      setRevealedCells(0)
+      setRevealedCellsToWin(getTotalRevealedCellsToWin())
    }
 
    const onChangeX = (e) => {
@@ -79,7 +81,7 @@ const Menu = ({ setPredefinedBoard, boardEl, setIsRunning, setSeconds, setFirstC
                      id="inputX"
                      className="input"
                      type="number"
-                     min={9}
+                     min={4}
                      max={50}
                      value={customData[0]}
                      onChange={(e) => onChangeX(e)}
