@@ -118,7 +118,7 @@ const getNeighbors = (x, y, board) => {
    return tempNeighbors
 }
 
-export const getBoardWithAllBombsRevealed = (boardTable, bombOrFlag) => {
+export const getBoardRevealed = (boardTable, bombOrFlag) => {
    const tempBoard = []
    boardTable.forEach((col) => {
       const tempCol = []
@@ -147,4 +147,4 @@ export const getCurrentBoardInfo = () => CURRENT_BOARD_PARAMETERS
 
 export const getCurrentBombsLeft = () => CURRENT_BOMBS_LEFT
 
-export const getTotalRevealedCellsToWin = () => +CURRENT_BOARD_PARAMETERS[0] * +CURRENT_BOARD_PARAMETERS[1] - CURRENT_BOMBS_LEFT
+export const getCurrentGoal = () => +CURRENT_BOARD_PARAMETERS[0] * +CURRENT_BOARD_PARAMETERS[1] - CURRENT_BOMBS_LEFT

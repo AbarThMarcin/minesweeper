@@ -1,13 +1,35 @@
-import { useState, useRef } from 'react'
-import { TEMPLATE_BEGINNER, TEMPLATE_INTERMEDIATE, TEMPLATE_EXPERT, getTotalRevealedCellsToWin } from '../func/createBoard'
+import { useState, useRef, useContext, useEffect } from 'react'
+import { TEMPLATE_BEGINNER, TEMPLATE_INTERMEDIATE, TEMPLATE_EXPERT } from '../func/boardFunctions'
+import { CellContext } from '../App'
 
-const Menu = ({ setPredefinedBoard, boardEl, setIsRunning, setSeconds, setFirstClick, setIsGameCompleted, setIsGameLost, setRevealedCells, setRevealedCellsToWin }) => {
-   const [customData, setCustomData] = useState([TEMPLATE_BEGINNER[0], TEMPLATE_BEGINNER[1], TEMPLATE_BEGINNER[2]])
+const BOMBS_FRACTION = 0.8
+
+const Menu = ({ timer }) => {
+   const { boardEl, restart } = useContext(CellContext)
+   const [customData, setCustomData] = useState([
+      TEMPLATE_BEGINNER[0],
+      TEMPLATE_BEGINNER[1],
+      TEMPLATE_BEGINNER[2],
+   ])
+   const [maxBombs, setMaxBombs] = useState(
+      Math.floor(BOMBS_FRACTION * parseInt(TEMPLATE_BEGINNER[0]) * parseInt(TEMPLATE_BEGINNER[1]))
+   )
    const menuEl = useRef(null)
    const customEl = useRef(null)
    const inputXEl = useRef(null)
    const inputYEl = useRef(null)
    const inputBombsEl = useRef(null)
+
+   useEffect(() => {
+      onInput(inputXEl.current)
+      onInput(inputYEl.current)
+      onInput(inputBombsEl.current)
+      if (customData[2] > maxBombs) setCustomData([customData[0], customData[1], maxBombs])
+   }, [maxBombs])
+
+   const calcMaxBombs = (x, y) => {
+      return Math.floor(BOMBS_FRACTION * parseInt(x) * parseInt(y))
+   }
 
    const expandCollapseMenu = () => {
       menuEl.current.classList.toggle('btnMenu-clicked')
@@ -18,37 +40,38 @@ const Menu = ({ setPredefinedBoard, boardEl, setIsRunning, setSeconds, setFirstC
    }
 
    const onClick = (gameLevel) => {
-      setPredefinedBoard(gameLevel)
-      boardEl.current.classList.remove('unclickable')
-      setIsRunning(false)
-      setSeconds(0)
-      setFirstClick(false)
-      menuEl.current.classList.toggle('btnMenu-clicked')
       setCustomData(gameLevel)
-      setIsGameCompleted(false)
-      setIsGameLost(false)
-      setRevealedCells(0)
-      setRevealedCellsToWin(getTotalRevealedCellsToWin())
+      restart(gameLevel)
+      timer.resetTimer()
+      boardEl.current.classList.remove('unclickable')
+      menuEl.current.classList.toggle('btnMenu-clicked')
    }
 
-   const onChangeX = (e) => {
-      setCustomData([e.target.value, customData[1], customData[2]])
+   const onChangeX = (input) => {
+      setMaxBombs(calcMaxBombs(input.value, inputYEl.current.value))
+      let tempData = [parseInt(input.value), customData[1], customData[2]]
+      if (tempData[2] > maxBombs) tempData[2] = maxBombs
+      setCustomData(tempData)
    }
-   const onChangeY = (e) => {
-      setCustomData([customData[0], e.target.value, customData[2]])
+   const onChangeY = (input) => {
+      setMaxBombs(calcMaxBombs(inputXEl.current.value, input.value))
+      let tempData = [customData[0], parseInt(input.value), customData[2]]
+      if (tempData[2] > maxBombs) tempData[2] = maxBombs
+      setCustomData(tempData)
    }
-   const onChangeBombs = (e) => {
-      setCustomData([customData[0], customData[1], e.target.value])
+   const onChangeBombs = (input) => {
+      onInput(inputBombsEl.current)
+      setCustomData([customData[0], customData[1], parseInt(input.value)])
    }
-   const onInput = (e) => {
-      const val = parseInt(e.target.value) | ''
-      const min = parseInt(e.target.min)
-      const max = parseInt(e.target.max)
+   const onInput = (input) => {
+      const val = parseInt(input.value) | ''
+      const min = parseInt(input.min)
+      const max = calcMaxBombs(inputXEl.current.value, inputYEl.current.value)
       if (val === '' || val < min) {
-         e.target.value = e.target.min
+         input.value = input.min
          return
       }
-      if (val > max) e.target.value = e.target.max
+      if (val > max) input.value = input.max
    }
 
    return (
@@ -81,11 +104,10 @@ const Menu = ({ setPredefinedBoard, boardEl, setIsRunning, setSeconds, setFirstC
                      id="inputX"
                      className="input"
                      type="number"
-                     min={4}
+                     min={9}
                      max={50}
                      value={customData[0]}
-                     onChange={(e) => onChangeX(e)}
-                     onInput={(e) => onInput(e)}
+                     onInput={(e) => onChangeX(e.target)}
                      required
                   />
                </div>
@@ -101,8 +123,7 @@ const Menu = ({ setPredefinedBoard, boardEl, setIsRunning, setSeconds, setFirstC
                      min={4}
                      max={30}
                      value={customData[1]}
-                     onChange={(e) => onChangeY(e)}
-                     onInput={(e) => onInput(e)}
+                     onInput={(e) => onChangeY(e.target)}
                      required
                   />
                </div>
@@ -116,10 +137,9 @@ const Menu = ({ setPredefinedBoard, boardEl, setIsRunning, setSeconds, setFirstC
                      className="input"
                      type="number"
                      min={1}
-                     max={Math.floor(0.9 * customData[0] * customData[1])}
+                     max={maxBombs}
                      value={customData[2]}
-                     onChange={(e) => onChangeBombs(e)}
-                     onInput={(e) => onInput(e)}
+                     onInput={(e) => onChangeBombs(e.target)}
                      required
                   />
                </div>

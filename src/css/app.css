@@ -5,6 +5,7 @@
 @import './bombsLeftTimer.css';
 @import './restart.css';
 @import './victory.css';
+@import './footer.css';
 @import url('https://fonts.googleapis.com/css2?family=Roboto+Mono:wght@700&display=swap');
 
 :root {

@@ -1,26 +1,14 @@
-import { getCurrentBoardInfo, getTotalRevealedCellsToWin } from '../func/createBoard'
+import { useContext } from 'react'
+import { getCurrentBoardInfo } from '../func/boardFunctions'
+import { CellContext } from '../App'
 
-const Restart = ({
-   setPredefinedBoard,
-   boardEl,
-   setIsRunning,
-   setSeconds,
-   setFirstClick,
-   setIsGameCompleted,
-   setIsGameLost,
-   setRevealedCells,
-   setRevealedCellsToWin,
-}) => {
+
+const Restart = ({ timer }) => {
+   const { boardEl, restart } = useContext(CellContext)
    const onClick = () => {
-      setPredefinedBoard(getCurrentBoardInfo())
+      restart(getCurrentBoardInfo())
       boardEl.current.classList.remove('unclickable')
-      setIsRunning(false)
-      setSeconds(0)
-      setFirstClick(false)
-      setIsGameCompleted(false)
-      setIsGameLost(false)
-      setRevealedCells(0)
-      setRevealedCellsToWin(getTotalRevealedCellsToWin())
+      timer.resetTimer()
    }
 
    return <button className="btnRestart" onClick={() => onClick()}></button>

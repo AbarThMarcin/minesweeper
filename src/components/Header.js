@@ -2,52 +2,23 @@ import Menu from './Menu'
 import Timer from './Timer'
 import Restart from './Restart'
 import BombsLeft from './BombsLeft'
+import { useRef } from 'react'
 
-const Header = ({
-   bombsLeft,
-   setPredefinedBoard,
-   boardEl,
-   setIsRunning,
-   setSeconds,
-   setFirstClick,
-   setIsGameCompleted,
-   setIsGameLost,
-   setRevealedCells,
-   setRevealedCellsToWin,
-}) => {
+const Header = () => {
+   const ref = useRef()
    return (
       <div className="header">
          <div>
-            <Menu
-               setPredefinedBoard={setPredefinedBoard}
-               boardEl={boardEl}
-               setIsRunning={setIsRunning}
-               setSeconds={setSeconds}
-               setFirstClick={setFirstClick}
-               setIsGameCompleted={setIsGameCompleted}
-               setIsGameLost={setIsGameLost}
-               setRevealedCells={setRevealedCells}
-               setRevealedCellsToWin={setRevealedCellsToWin}
-            />
+            <Menu timer={ref.current} />
          </div>
          <div>
-            <BombsLeft bombsLeft={bombsLeft} />
+            <BombsLeft />
          </div>
          <div>
-            <Restart
-               setPredefinedBoard={setPredefinedBoard}
-               boardEl={boardEl}
-               setIsRunning={setIsRunning}
-               setSeconds={setSeconds}
-               setFirstClick={setFirstClick}
-               setIsGameCompleted={setIsGameCompleted}
-               setIsGameLost={setIsGameLost}
-               setRevealedCells={setRevealedCells}
-               setRevealedCellsToWin={setRevealedCellsToWin}
-            />
+            <Restart timer={ref.current} />
          </div>
          <div>
-            <Timer />
+            <Timer ref={ref} />
          </div>
       </div>
    )

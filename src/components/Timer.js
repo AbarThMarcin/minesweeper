@@ -1,10 +1,35 @@
-import { useContext } from 'react'
-import { timerContext } from '../App'
+import { useEffect, useContext, useRef, useState, forwardRef, useImperativeHandle } from 'react'
+import { CellContext } from '../App'
 
-const Timer = () => {
-   const { seconds, setSeconds } = useContext(timerContext)
+const Timer = forwardRef((props, ref) => {
+   const timer = useRef(0)
+   const [timerOnApp, setTimerOnApp] = useState(0)
+   const { isRunning, isGameRestarted } = useContext(CellContext)
+   useImperativeHandle(ref, () => ({
+      resetTimer: () => {
+         timer.current = 0
+         setTimerOnApp(0)
+      },
+   }))
 
-   return <div className="timer bombsLeftTimer">{('00' + seconds).slice(-3)}</div>
-}
+   // Turn timer on
+   useEffect(() => {
+      if (isRunning) {
+         const timerInt = setInterval(() => (timer.current += 0.01), 10)
+         setTimeout(() => setTimerOnApp(timer.current), 0.01)
+         const timerIntOnApp = setInterval(() => setTimerOnApp(timer.current), 1000)
+         return () => {
+            clearInterval(timerInt)
+            clearInterval(timerIntOnApp)
+         }
+      }
+   }, [isRunning, isGameRestarted])
+
+   return (
+      <div className="timer bombsLeftTimer">
+         {('00' + parseInt(Math.round(timerOnApp))).slice(-3)}
+      </div>
+   )
+})
 
 export default Timer
