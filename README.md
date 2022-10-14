@@ -1,6 +1,6 @@
 # Minesweeper
 
-### A recreation of a classic Minesweeper with additional features.
+#### A recreation of a classic Minesweeper with additional features.
 
 ## Demo
 
