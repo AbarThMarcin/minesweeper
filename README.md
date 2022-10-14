@@ -1,3 +1,5 @@
 # Minesweeper
 
-Classic Minesweeper game recreation with minor features.
+### A recreation of a classic Minesweeper with some additional features.
+
+Project posted to heroku.
