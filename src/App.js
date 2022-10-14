@@ -1,4 +1,4 @@
-import './css/app.css'
+import './style/app.css'
 import Board from './components/Board'
 import Header from './components/Header'
 import Victory from './components/Victory'
@@ -10,7 +10,7 @@ import {
    getCurrentBombsLeft,
    getRandomBoard,
    getCurrentGoal,
-} from './func/boardFunctions'
+} from './utils/boardFunctions'
 import Footer from './components/Footer'
 
 export const TimerContext = createContext(0)
@@ -27,7 +27,7 @@ function App() {
    const [score, setScore] = useState(0)
    const [goal, setGoal] = useState(0)
    const boardEl = useRef(null)
-   
+
    // Create board
    useEffect(() => {
       // Check if game is finished

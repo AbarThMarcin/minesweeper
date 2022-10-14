@@ -147,4 +147,5 @@ export const getCurrentBoardInfo = () => CURRENT_BOARD_PARAMETERS
 
 export const getCurrentBombsLeft = () => CURRENT_BOMBS_LEFT
 
-export const getCurrentGoal = () => +CURRENT_BOARD_PARAMETERS[0] * +CURRENT_BOARD_PARAMETERS[1] - CURRENT_BOMBS_LEFT
+export const getCurrentGoal = () =>
+   +CURRENT_BOARD_PARAMETERS[0] * +CURRENT_BOARD_PARAMETERS[1] - CURRENT_BOMBS_LEFT

@@ -1,5 +1,5 @@
 import { useContext } from 'react'
-import { getCurrentBoardInfo } from '../func/boardFunctions'
+import { getCurrentBoardInfo } from '../utils/boardFunctions'
 import { CellContext } from '../App'
 
 const Restart = ({ timer }) => {

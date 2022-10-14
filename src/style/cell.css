@@ -53,8 +53,7 @@
    background-color: var(--darkgray);
 }
 .cell.bomb.bomb-clicked {
-   background: url('../../public/icons/bomb-clicked.jpg') center center / cover
-      no-repeat;
+   background: url('../../public/icons/bomb-clicked.jpg') center center / cover no-repeat;
 }
 .cell.flag {
    color: transparent;

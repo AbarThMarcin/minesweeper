@@ -1,5 +1,5 @@
 import { useState, useRef, useContext, useEffect } from 'react'
-import { TEMPLATE_BEGINNER, TEMPLATE_INTERMEDIATE, TEMPLATE_EXPERT } from '../func/boardFunctions'
+import { TEMPLATE_BEGINNER, TEMPLATE_INTERMEDIATE, TEMPLATE_EXPERT } from '../utils/boardFunctions'
 import { CellContext } from '../App'
 
 const BOMBS_FRACTION = 0.8
