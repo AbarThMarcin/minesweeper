@@ -1,5 +1,15 @@
 # Minesweeper
 
-### A recreation of a classic Minesweeper with some additional features.
+### A recreation of a classic Minesweeper with additional features.
 
-Project posted to heroku.
+## Demo
+
+Working live demo: https://abarth-minesweeper.herokuapp.com/
+
+## Site
+
+![](https://i.imgur.com/PqvZ5GG.jpeg)
+
+## Built with
+
+-  [React JS](https://reactjs.org/)
